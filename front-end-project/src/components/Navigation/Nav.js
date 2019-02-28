@@ -3,8 +3,8 @@ import './Nav.css';
 
 const Nav = () => {
     return (
-        <div>
-            <h1>Lambda Notes</h1>
+        <div className="Nav">
+            <h1 className="navTitle">Lambda <br/>Notes</h1>
             <nav>
                 <button>View Your Notes</button>
                 <button>+Create New Notes</button>

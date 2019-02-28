@@ -1,11 +1,12 @@
 import React from 'react';
-import './Note.css';
 
-const Note = props => {
+const ViewNote = props =>{
     return(
         <div>
-            <h3></h3>
+            <h2></h2>
             <p></p>
         </div>
     )
 }
+
+export default ViewNote;

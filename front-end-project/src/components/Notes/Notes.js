@@ -3,12 +3,15 @@ import './Notes.css';
 
 class Notes extends Component{
     
+    
     render(){
         return(
             <div>
                 <h2>Your Notes:</h2>
-                
+                {/* <Note /> */}
             </div>
         )
     }
 }
+
+export default Notes;
