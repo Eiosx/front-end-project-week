@@ -32,8 +32,14 @@ class App extends Component {
     axios
       .post("https://fe-notes.herokuapp.com/note/create", newNote)
       .then(response => {
-        console.log(response.data)
-        this.setState({ myNotes: [...this.state.myNotes, response.data.success] })
+        axios
+          .get(`https://fe-notes.herokuapp.com/note/get/${response.data.success}`)
+          .then(response => {
+            this.setState({ myNotes: [...this.state.myNotes, response.data] })
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch(err => {
         console.log(err)
@@ -41,18 +47,37 @@ class App extends Component {
     this.setState({ noteTitle: '', noteContent: '' })
   }
 
-  handleViewNote = event => {
-    event.preventDefault();
-
-    // axios.get(`https://fe-notes.herokuapp.com/note/get/${asdfsa}`)
+  handleUpdate = note => {
+    axios.put(`https://fe-notes.herokuapp.com/note/edit/${note['_id']}`, note)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
+
+  handleDelete = note => {
+    axios.delete(`https://fe-notes.herokuapp.com/note/delete/${note['_id']}`)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  // handleViewNote = event => {
+  //   event.preventDefault();
+  //   // axios.get(`https://fe-notes.herokuapp.com/note/get/${asdfsa}`)
+  // }
 
   render() {
     return (
       <div className="App">
         <Nav />
         <CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} />
-        <Notes myNotes={this.state.myNotes}/>
+        <Notes myNotes={this.state.myNotes} />
       </div>
     );
   }

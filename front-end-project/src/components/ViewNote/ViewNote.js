@@ -3,8 +3,8 @@ import React from 'react';
 const ViewNote = props =>{
     return(
         <div>
-            <h2></h2>
-            <p></p>
+            <h2>{props.title}</h2>
+            <p>{props.textBody}</p>
         </div>
     )
 }
