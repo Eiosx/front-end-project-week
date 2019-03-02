@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { route } from 'react-router-dom';
 
 import './App.css';
 import CreateNote from './components/CreateNote/CreateNote';
@@ -49,22 +50,22 @@ class App extends Component {
 
   handleUpdate = note => {
     axios.put(`https://fe-notes.herokuapp.com/note/edit/${note['_id']}`, note)
-    .then(response => {
-      console.log(response)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   handleDelete = note => {
     axios.delete(`https://fe-notes.herokuapp.com/note/delete/${note['_id']}`)
-    .then(response => {
-      console.log(response)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   // handleViewNote = event => {
@@ -75,9 +76,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav />
-        <CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} />
-        <Notes myNotes={this.state.myNotes} />
+        <Route path="/" component={Nav} />
+        {/* <Nav /> */}
+        <Route exact path="/create" component={CreateNote} />
+        {/* <CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} /> */}
+        <Route path="/" component={Notes} />
+        {/* <Notes myNotes={this.state.myNotes} /> */}
       </div>
     );
   }
