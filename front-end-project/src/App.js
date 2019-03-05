@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import './App.css';
 import CreateNote from './components/CreateNote/CreateNote';
 import Nav from './components/Navigation/Nav';
 import Notes from './components/Notes/Notes';
+import ViewNote from './components/ViewNote/ViewNote';
 
 class App extends Component {
 
@@ -16,6 +17,17 @@ class App extends Component {
       noteContent: '',
       myNotes: []
     }
+  }
+
+  componentDidMount() {
+    axios.get('https://fe-notes.herokuapp.com/note/get/all')
+      .then(response => {
+        this.setState({ myNotes: response.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
   }
 
   handleInput = event => {
@@ -78,9 +90,9 @@ class App extends Component {
       <div className="App">
         <Route path="/" component={Nav} />
         {/* <Nav /> */}
-        <Route exact path="/create" component={CreateNote} />
+        <Route exact path="/create" render={() => (<CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} />)} />
         {/* <CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} /> */}
-        <Route path="/" component={Notes} />
+        <Route exact path="/" render={() => (<Notes myNotes={this.state.myNotes} />)} />
         {/* <Notes myNotes={this.state.myNotes} /> */}
       </div>
     );
