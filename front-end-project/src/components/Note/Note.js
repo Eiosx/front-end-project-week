@@ -11,7 +11,7 @@ const Note = props => {
                 <h3>{props.title}</h3>
                 <p>{props.textBody}</p>
             </Link>
-            <Route exact path={`/${props.idNum}`} render={() => (<ViewNote idNum={props.idNum} title={props.title} textBody={props.textBody} />)} />
+            {/* <Route path={`/${props.idNum}`} render={() => (<ViewNote idNum={props.idNum} title={props.title} textBody={props.textBody} />)} /> */}
         </div>
     )
 }

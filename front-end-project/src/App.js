@@ -61,6 +61,7 @@ class App extends Component {
   }
 
   handleUpdate = note => {
+    note.preventDefault();
     axios.put(`https://fe-notes.herokuapp.com/note/edit/${note['_id']}`, note)
       .then(response => {
         console.log(response)
@@ -80,10 +81,6 @@ class App extends Component {
       })
   }
 
-  // handleViewNote = event => {
-  //   event.preventDefault();
-  //   // axios.get(`https://fe-notes.herokuapp.com/note/get/${asdfsa}`)
-  // }
 
   render() {
     return (
@@ -92,7 +89,7 @@ class App extends Component {
         {/* <Nav /> */}
         <Route exact path="/create" render={() => (<CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} />)} />
         {/* <CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} /> */}
-        <Route exact path="/" render={() => (<Notes myNotes={this.state.myNotes} />)} />
+        <Route path="/" render={() => (<Notes myNotes={this.state.myNotes} />)} />
         {/* <Notes myNotes={this.state.myNotes} /> */}
       </div>
     );
