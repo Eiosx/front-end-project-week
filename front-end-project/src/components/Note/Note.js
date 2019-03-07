@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 const Note = props => {
     return (
         <div className="Note" >
-            <Link to={`${props.idNum}`}>
+            <Link to={`/${props.idNum}`}>
                 <h3>{props.title}</h3>
                 <p>{props.textBody}</p>
             </Link>

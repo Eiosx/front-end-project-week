@@ -60,8 +60,8 @@ class App extends Component {
     this.setState({ noteTitle: '', noteContent: '' })
   }
 
-  handleUpdate = note => {
-    note.preventDefault();
+  handleUpdate = (event, note) => {
+    event.preventDefault();
     axios.put(`https://fe-notes.herokuapp.com/note/edit/${note['_id']}`, note)
       .then(response => {
         console.log(response)
@@ -71,8 +71,9 @@ class App extends Component {
       })
   }
 
-  handleDelete = note => {
-    axios.delete(`https://fe-notes.herokuapp.com/note/delete/${note['_id']}`)
+  handleDelete = (event, idNum) => {
+    event.preventDefault();
+    axios.delete(`https://fe-notes.herokuapp.com/note/delete/${idNum}`)
       .then(response => {
         console.log(response)
       })
@@ -89,7 +90,7 @@ class App extends Component {
         {/* <Nav /> */}
         <Route exact path="/create" render={() => (<CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} />)} />
         {/* <CreateNote handleInput={this.handleInput} handleNewNote={this.handleNewNote} noteTitle={this.state.noteTitle} noteContent={this.state.noteContent} /> */}
-        <Route path="/" render={() => (<Notes myNotes={this.state.myNotes} />)} />
+        <Route path="/" render={() => (<Notes myNotes={this.state.myNotes} handleUpdate={this.handleUpdate} handleDelete={this.handleDelete} />)} />
         {/* <Notes myNotes={this.state.myNotes} /> */}
       </div>
     );
