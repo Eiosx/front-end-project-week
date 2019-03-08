@@ -64,7 +64,13 @@ class App extends Component {
     event.preventDefault();
     axios.put(`https://fe-notes.herokuapp.com/note/edit/${note['_id']}`, note)
       .then(response => {
-        console.log(response)
+        axios.get('https://fe-notes.herokuapp.com/note/get/all')
+          .then(response => {
+            this.setState({ myNotes: response.data })
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch(err => {
         console.log(err)
@@ -75,7 +81,13 @@ class App extends Component {
     event.preventDefault();
     axios.delete(`https://fe-notes.herokuapp.com/note/delete/${idNum}`)
       .then(response => {
-        console.log(response)
+        axios.get('https://fe-notes.herokuapp.com/note/get/all')
+          .then(response => {
+            this.setState({ myNotes: response.data })
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch(err => {
         console.log(err)
