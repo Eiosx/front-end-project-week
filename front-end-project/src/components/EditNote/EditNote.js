@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class EditNote extends Component {
 
@@ -6,8 +8,20 @@ class EditNote extends Component {
         super(props);
         this.state = {
             noteTitle: '',
-            noteContent: ''
+            noteContent: '',
+            note: {}
         }
+    }
+
+    componentDidMount() {
+        axios.get(`https://fe-notes.herokuapp.com/note/get/${this.props.match.params.id}`)
+            .then(response => {
+                console.log(response.data)
+                this.setState({ note: response.data })
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     handleInput = event => {
@@ -21,12 +35,17 @@ class EditNote extends Component {
         return (
             <div>
                 <h2>Edit Note:</h2>
-                <form onSubmit={{/*(event) => {
-                    return this.props.handleUpdate(event, { ...props.note, title: this.noteTitle, textBody: this.noteContent });
-                }*/}}>
+                <form>
                     <input onChange={this.handleInput} type="text" placeholder="Note Title" name="noteTitle" value={this.noteTitle} />
                     <input onChange={this.handleInput} type="text" placeholder="Note Content" name="noteContent" value={this.noteContent} />
-                    <input type="submit" value="Update" />
+
+                    <button onClick={(event) => {
+                        return this.props.handleUpdate(event, { '_id': this.state.note['_id'], title: this.state.noteTitle, textBody: this.state.noteContent });
+                    }}>Update</button>
+                    <Link to='/'>
+                        <button>Go Back</button>
+                    </Link>
+
                 </form>
             </div>
         )
