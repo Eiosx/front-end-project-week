@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import './EditNote.css';
+
 class EditNote extends Component {
 
     constructor(props) {
@@ -33,15 +35,15 @@ class EditNote extends Component {
 
 
         return (
-            <div>
+            <div className="EditContainer">
                 <h2>Edit Note:</h2>
                 <form>
                     <input onChange={this.handleInput} type="text" placeholder="Note Title" name="noteTitle" value={this.noteTitle} />
-                    <input onChange={this.handleInput} type="text" placeholder="Note Content" name="noteContent" value={this.noteContent} />
+                    <input className="EditNoteContent" onChange={this.handleInput} type="text" placeholder="Note Content" name="noteContent" value={this.noteContent} />
 
                     <button onClick={(event) => {
                         return this.props.handleUpdate(event, { '_id': this.state.note['_id'], title: this.state.noteTitle, textBody: this.state.noteContent });
-                    }}>Update</button>
+                    }}>Save</button>
                     <Link to='/'>
                         <button>Go Back</button>
                     </Link>

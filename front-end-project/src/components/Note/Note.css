@@ -1,16 +1,16 @@
 .Note{
-    border: 1px solid black;
+    
     display: flex;
     justify-content: center;
     background-color: white;
     width: 20%;
-    margin: 0 2%;
+    margin: 1% 2%;
     
 }
 
 .Link{
     text-decoration: none;
-    color: black;
+    
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -27,8 +27,9 @@ h3{
 
 p{
 
-    border: 1px solid red;
+    
     width: 90%;
-    display: flex;
-    flex-wrap: nowrap;
+    max-width: 100%;
+    
+    align-self: center;
 }

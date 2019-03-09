@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import { Route } from 'react-router-dom';
 
-// import EditNote from '../EditNote/EditNote';
+import './ViewNote.css';
 
 class ViewNote extends Component {
     constructor(props) {
@@ -26,7 +25,8 @@ class ViewNote extends Component {
 
 
         return (
-            <div>
+            <div className="ViewContainer">
+            <div className=""></div>
                 <Link to={`/${this.state.note['_id']}/edit`}>edit </Link>
                 <Link to={`/${this.state.note['_id']}/delete`}>delete</Link>
                 <h2>{this.state.note.title}</h2>
